@@ -3,9 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
+  constructor(props){
+    super(props);
+    this.state = {isLoading: true}
+  }
+
+  componentDidMount() {
+      this.setState({isLoading: false})
+  }
+
+  renderLoading(){
+    return <div>Loading...</div>
+  }
+
+  renderHome(){
+    return  <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
@@ -21,6 +33,10 @@ class App extends Component {
           </a>
         </header>
       </div>
+  }
+  render() {
+    return (
+      this.state.isLoading ? this.renderLoading() : this.renderHome()
     );
   }
 }
